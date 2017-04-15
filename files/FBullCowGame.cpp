@@ -66,7 +66,7 @@ EWordStatus FBullCowGame::checkGuessValidity(FString guess) const{
     }
 }
 
-//Checks via a char TO bool map if the Guess is an Isogram
+//Checks via a char TO bool map if the Guess is an Isogram [O(n) COMPLEXITY]!!!
 bool FBullCowGame::isIsogram(FString guess) const {
     if (guess.length() <= 1) {return true;}
     TMap <char,bool> LetterSeen;
