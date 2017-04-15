@@ -7,6 +7,9 @@
 #pragma once
 #include "Fincludes.h"
 
+bool OpenFile(FString);
+FString GenerateHiddenWord();
+
 //A pair counter
 struct FBullCowCount {
     int32 Bulls = 0;

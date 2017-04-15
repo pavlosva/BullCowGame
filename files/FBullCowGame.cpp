@@ -8,6 +8,42 @@
 
 #include "FBullCowGame.hpp"
 
+FVector<FString> WordList;
+
+bool OpenFile(FString filename) {
+    std::ifstream file(filename);
+    
+    //Checking if the file is open
+    if (!file.is_open()){
+        std::cout << "Error opening the file! EXITING\n";
+        return false;
+    }
+    
+    //Getting the Words to the vector!
+    while (file.good()) {
+        FString word;
+        std::getline(file,word);
+        WordList.push_back(word);
+    }
+    //Checks if there's a random blank string at the end of the vector
+    if (WordList[WordList.size()] == "") {
+        WordList.pop_back();
+    }
+    //Deletes Pointer
+    file.close();
+    return true;
+}
+
+FString GenerateHiddenWord() {
+    if (OpenFile("Wordlist.txt")) {
+        srand((unsigned int)time(NULL));
+        int32 ptr = rand() % (int32)WordList.size();
+        return WordList[ptr];
+    }
+    exit(1);
+    return DEFAULT_HIDDEN_WORD;
+}
+
 //Default Constructor
 FBullCowGame::FBullCowGame() {
     Reset();
@@ -22,8 +58,7 @@ int32 FBullCowGame::getMaxTries() const{
 //Resets the game
 void FBullCowGame::Reset() {
     myCurrentTry = 1;
-    const FString HIDDEN_WORD = "planet"; // <--- This MUST be an isogram.
-    myHiddenWord = HIDDEN_WORD; 
+    myHiddenWord = GenerateHiddenWord();
     return;
 }
 
@@ -66,7 +101,7 @@ EWordStatus FBullCowGame::checkGuessValidity(FString guess) const{
     }
 }
 
-//Checks via a char TO bool map if the Guess is an Isogram [O(n) COMPLEXITY]!!!
+//Checks via a char TO bool map if the Guess is an Isogram
 bool FBullCowGame::isIsogram(FString guess) const {
     if (guess.length() <= 1) {return true;}
     TMap <char,bool> LetterSeen;
