@@ -1,4 +1,4 @@
-//  v1.0
+//  v2.0
 //  FBullCowGame.hpp
 //  BullCowGame
 //  Created by Παύλος Βασιλείου on 14/04/2017.
