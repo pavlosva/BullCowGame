@@ -1,4 +1,4 @@
-//  v1.0
+//  v2.0
 //  main.cpp
 //  BullCowGame
 //  "This file contais the Actual Game Routine as welll as the User Interaction.
